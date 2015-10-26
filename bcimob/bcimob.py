@@ -12,3 +12,7 @@ def cli():
 @cli.command(name='initialisedb')
 def initialisedb_command():
     initialisedb()
+
+
+if __name__ == '__main__':
+    cli()
