@@ -1,0 +1,5 @@
+click
+SQLAlchemy
+ipython
+ipdb
+python-decouple
