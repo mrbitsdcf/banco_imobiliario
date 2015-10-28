@@ -11,3 +11,7 @@ Com o advento do Super Banco Imobiliário (tm), onde as cédulas foram substitu�
 Naturalmente, as crianças vão achar muito mais interessante o trabalho de cartões. O jogo é lúdico e ensina aos pequenos como trabalhar com o dinheiro virtual que temos hoje, bem como introduz o mundo dos negócios de "real state" aos nossos filhos.
 
 ## Instalação
+
+```
+$ pip install -r requirements.txt
+```
