@@ -3,7 +3,7 @@
 from sqlalchemy.engine import create_engine
 from sqlalchemy.orm.session import Session
 
-from models import Base  # This is your declarative base class
+from models import Base, Player, Movement  # This is your declarative base class
 
 
 def setup_module():

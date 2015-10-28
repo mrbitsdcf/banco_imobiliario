@@ -11,7 +11,19 @@ Com o advento do Super Banco Imobiliário (tm), onde as cédulas foram substitu�
 Naturalmente, as crianças vão achar muito mais interessante o trabalho de cartões. O jogo é lúdico e ensina aos pequenos como trabalhar com o dinheiro virtual que temos hoje, bem como introduz o mundo dos negócios de "real state" aos nossos filhos.
 
 ## Instalação
-
 ```
 $ pip install -r requirements.txt
 ```
+
+
+## Como rodar
+
+Após a instalação, devemos entrar no diretório bcimob para rodar os comandos
+
+### Iniciando um novo jogo
+
+O comando abaixo iniciará um novo jogo com a quantidade de jogadores especificada no parâmetro [número de jogadores] mais o banqueiro, resetando os valores para os BI$ 25.000,00 regulares.
+```
+$ ./bcimob.py start_game [número de jogadores] 
+```
+

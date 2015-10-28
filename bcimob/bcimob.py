@@ -93,7 +93,7 @@ def movement_command(mov_type, player_out=None, player_in=None, amount=0.0):
         subtract_money(player_out, float(amount))
     elif mov_type == 'PAY':
         print "Player {0} pagando {1} para Player {2}".format(player_out, amount, player_in)
-        pay_money(player_in, player_out, float(amount))
+        pay_money(player_out, player_in, float(amount))
 
 if __name__ == '__main__':
     cli()
