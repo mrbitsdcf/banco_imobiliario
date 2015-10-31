@@ -1,24 +1,30 @@
 # -*- coding: utf-8 -*-
 
 import logging
-import warnings
-from sqlalchemy import Column, ForeignKey, Integer, String, Numeric
+from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session, relationship, sessionmaker, backref
 from sqlalchemy import create_engine
-from sqlalchemy.exc import SAWarning
+from decimal import Decimal
+import sqlalchemy.types as types
 
+
+class SqliteNumeric(types.TypeDecorator):
+    impl = types.String
+
+    def load_dialect_impl(self, dialect):
+        return dialect.type_descriptor(types.VARCHAR(100))
+
+    def process_bind_param(self, value, dialect):
+        return str(value)
+
+    def process_result_value(self, value, dialect):
+        return Decimal(value)
+
+Numeric = SqliteNumeric
 DBSession = scoped_session(sessionmaker(autoflush=False))
 
 logger = logging.getLogger(__name__)
-
-warnings.filterwarnings(
-    'ignore',
-    r"^Dialect sqlite\+pysqlite does \*not\* support Decimal objects natively\, "
-    "and SQLAlchemy must convert from floating point - rounding errors and other "
-    "issues may occur\. Please consider storing Decimal numbers as strings or "
-    "integers on this platform for lossless storage\.$",
-    SAWarning, r'^sqlalchemy\.sql\.type_api$')
 
 
 class classproperty(object):
@@ -70,7 +76,7 @@ class Movement(Base):
     __mapper_args__ = {'polymorphic_identity': 'movement'}
 
     id = Column(Integer, primary_key=True)
-    amount = Column(Numeric(19, 10, asdecimal=True), nullable=False)
+    amount = Column(Numeric(19, 10), nullable=False)
     player_id = Column(Integer, ForeignKey('player.id'), nullable=False, index=True)
     player = relationship("Player", backref=backref('movement', lazy='dynamic'), foreign_keys=[player_id])
     move_type = Column(String(1), index=True)
