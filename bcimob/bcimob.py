@@ -85,9 +85,6 @@ def list_movement(players):
         print "Player: {0} - Tipo: {1} - Valor: BI$ {2}".format(movement.player.player_name, movement_type, movement.amount)
 
 
-# movement IN player valor
-# movement OUT player valor
-# movement PAY player OUT player IN valor
 @cli.command(name='movement', short_help='Movimenta dinheiro')
 @click.argument('mov_type')
 @click.argument('player_out', default=None)
