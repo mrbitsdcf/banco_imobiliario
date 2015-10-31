@@ -85,6 +85,7 @@ def list_movement(players):
 @click.argument('player_in', default=None)
 @click.argument('amount')
 def movement_command(mov_type, player_out=None, player_in=None, amount=0.0):
+    '''IN = Transfere para jogador\nOUT = Tira do jogador\nPAY = Paga de um jogador para outro'''
     if mov_type == 'IN':
         print "Player {0} recebendo {1}".format(player_in, amount)
         add_money(player_in, float(amount))
