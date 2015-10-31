@@ -59,3 +59,8 @@ target/
 
 # Database
 *.db
+
+# Some stuff
+t.t
+d.d
+a.a
