@@ -41,22 +41,20 @@ def add_players_command(num_of_players):
 @click.argument('num_of_players')
 def start_game_command(num_of_players):
     '''num_of_players: Numero de jogadores'''
-    click.echo("Iniciando novo jogo com {} jogadores".format(num_of_players))
+    click.secho("Iniciando novo jogo com {} jogadores".format(num_of_players), fg='yellow')
     initialisedb()
-    with click.progressbar(
-        length=int(num_of_players) + 1,
-        label="Inserindo {0} jogadores com BI$ 25.000,00 cada e banqueiro".format(num_of_players)
-    ) as players:
+    with click.progressbar(range(int(num_of_players))) as players:
         for p in players:
             player_name = 'Player {}'.format(p + 1)
+            click.secho(' Inserindo jogador {0}'.format(player_name), fg='green')
             player = Player(player_name=player_name)
             DBSession.add(player)
-            players.update(p)
 
-        player = Player(player_name='Banqueiro', balance=float(1000000.0))
-        DBSession.add(player)
-        DBSession.flush()
-        DBSession.commit()
+    player = Player(player_name='Banqueiro', balance=float(1000000.0))
+    DBSession.add(player)
+
+    DBSession.flush()
+    DBSession.commit()
 
 
 @cli.command(name='list_balance', short_help="Lista dinheiro dos jogadores")
