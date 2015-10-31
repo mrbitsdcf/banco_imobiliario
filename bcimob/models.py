@@ -8,6 +8,14 @@ from sqlalchemy import create_engine
 from decimal import Decimal
 import sqlalchemy.types as types
 
+DBSession = scoped_session(sessionmaker(autoflush=False))
+logging.basicConfig(
+    filename='bcimob_db.log',
+    format='%(asctime)s [%(levelname)s] %(name)s [%(process)d]: %(message)s',
+)
+logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
+logger = logging.getLogger(__name__)
+
 
 class SqliteNumeric(types.TypeDecorator):
     impl = types.String
@@ -22,9 +30,6 @@ class SqliteNumeric(types.TypeDecorator):
         return Decimal(value)
 
 Numeric = SqliteNumeric
-DBSession = scoped_session(sessionmaker(autoflush=False))
-
-logger = logging.getLogger(__name__)
 
 
 class classproperty(object):
